@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+    http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+	<!-- icon?, display-name?, description?, distributable?, context-param*, 
+		filter*, filter-mapping*, listener*, servlet*, servlet-mapping*, session-config?, 
+		mime-mapping*, welcome-file-list?, error-page*, taglib*, resource-env-ref*, 
+		resource-ref*, security-constraint*, login-config?, security-role*, env-entry*, 
+		ejb-ref*, ejb-local-ref* -->
+	<display-name>javaweb</display-name>
+	<description>this is a simple web project</description>
+
+	<!-- 存放在servletcontext中的参数，通过getServletContext().getInitParameter获取 -->
+	<context-param>
+		<param-name>isParam</param-name>
+		<param-value>true</param-value>
+	</context-param>
+
+	<!-- 配置url上的过滤器 -->
+	<filter>
+		<filter-name>demoFilter</filter-name>
+		<filter-class>com.lwr.filter.DemoFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>demoFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 配置监听器 -->
+	<listener>
+		<listener-class>com.lwr.listener.DemoListener</listener-class>
+	</listener>
+
+	<!-- 配置一个servlet监听http请求 -->
+	<servlet>
+		<servlet-name>demoServlet</servlet-name>
+		<servlet-class>com.lwr.servlet.DemoServlet</servlet-class>
+		<init-param>
+			<description>存放在Servlet的ServletConfig中</description>
+			<param-name>demoServlet-param</param-name>
+			<param-value>demoServlet-value</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>demoServlet</servlet-name>
+		<url-pattern>/s/*</url-pattern>
+	</servlet-mapping>
+
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404.html</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/500.html</location>
+	</error-page>
+	
+	
+</web-app>
